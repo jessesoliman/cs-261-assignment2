@@ -135,10 +135,11 @@ class DynamicArray:
         """
         TODO: Write this implementation
         """
-        capacity = new_capacity * 2
-        new_arr = StaticArray(capacity)
-        self._capacity = capacity
-        for i in range(new_capacity):
+        if new_capacity < self._size or new_capacity < 1:
+            return
+        new_arr = StaticArray(new_capacity)
+        self._capacity = new_capacity
+        for i in range(self._size):
             new_arr[i] = self._data[i]
         self._data = new_arr
 
@@ -147,7 +148,7 @@ class DynamicArray:
         TODO: Write this implementation
         """
         if self._size >= self._capacity:
-            self.resize(self._capacity)
+            self.resize(self._capacity * 2)
         self._data[self._size] = value
         self._size = self._size + 1
 
@@ -155,7 +156,12 @@ class DynamicArray:
         """
         TODO: Write this implementation
         """
-        pass
+        if self._size >= self._capacity:
+            self.resize(self._capacity * 2)
+        for i in range(self._size - index):
+            self._data[self._size - i] = self._data[self._size - (1+i)]
+        self._data[index] = value
+        self._size += 1
 
     def remove_at_index(self, index: int) -> None:
         """
