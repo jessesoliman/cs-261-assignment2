@@ -179,7 +179,13 @@ class DynamicArray:
         """
         TODO: Write this implementation
         """
-        pass
+        if start_index + size > self._size:
+            return Exception  # how to implement?
+        slice_array = StaticArray(size)
+        for i in range (start_index, start_index + size+1):
+            slice_array[i] = self._data[i]
+        dslice_array = DynamicArray(slice_array)
+        return dslice_array
 
     def merge(self, second_da: "DynamicArray") -> None:
         """
