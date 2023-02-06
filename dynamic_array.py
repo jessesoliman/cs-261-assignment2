@@ -156,6 +156,8 @@ class DynamicArray:
         """
         TODO: Write this implementation
         """
+        # if index < 0 or index >= self._size:
+            # raise DynamicArrayException
         if self._size >= self._capacity:
             self.resize(self._capacity * 2)
         for i in range(self._size - index):
@@ -180,12 +182,15 @@ class DynamicArray:
         TODO: Write this implementation
         """
         if start_index + size > self._size:
-            return Exception  # how to implement?
-        slice_array = StaticArray(size)
-        for i in range (start_index, start_index + size+1):
-            slice_array[i] = self._data[i]
-        dslice_array = DynamicArray(slice_array)
-        return dslice_array
+            raise Exception("slice out of range")  # how to implement?
+        if start_index < 0 or start_index > self._size - 1:
+            raise Exception("out of bounds index")
+        if size < 0:
+            raise Exception
+        slice_array = DynamicArray()
+        for i in range(start_index, start_index + size):
+            slice_array.append(self._data[i])
+        return slice_array
 
     def merge(self, second_da: "DynamicArray") -> None:
         """
